@@ -16,9 +16,15 @@
       <form (ngSubmit)="onSubmit()" #form="ngForm">
         <div class="form-group">
           <label>Email</label>
-          <input type="text" id="email" class="form-control" ngModel name="email" required #email="ngModel">
+          <input type="email" id="email" class="form-control" ngModel name="email" required email #email="ngModel">
           <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email</span>
         </div>
+
+          <select class="form-select" id="subscription" [(ngModel)]="subscription" name="subscription">
+            <option *ngFor="let subOption of subscriptionOptions" [value]="subOption">
+              {{subOption}}
+            </option>
+          </select>
 
         <div class="form-group">
           <label>Password</label>
@@ -26,8 +32,23 @@
           <span class="help-block" *ngIf="!password.valid && password.touched">Please enter a valid password</span>
         </div>
 
-        <button class="btn btn-primary" type="submit" [disabled]="!email.valid">Submit</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!email.valid || !password.valid">Submit</button>
       </form>
+
+
+      <hr>
+      <div *ngIf="form.submitted === true;">
+        <h3>Your information entered in the form:</h3>
+        <div>
+          <p>Email submtted: {{email.value}}</p>
+          <p>Subscription service chosen: {{subscription}}</p>
+          <p>Password entered: {{password.value}}</p>
+        </div>
+      </div>
+
+
     </div>
   </div>
 </div>
+
+  
