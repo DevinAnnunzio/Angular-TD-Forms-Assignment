@@ -12,10 +12,14 @@ export class AppComponent{
 
   subscription: string
   subscriptionOptions = ['Basic', 'Advanced', 'Pro']
+  email: string
+  password:string
 
-  // ngOnInIt(){
-  //   this.subscription = 'Advanced'
-  // }
+  userSelection = {
+    email: '',
+    subscription: '',
+    password: ''
+  }
 
   constructor(){
     this.subscription = 'Advanced'
@@ -23,5 +27,10 @@ export class AppComponent{
 
   onSubmit(){
     console.log(this.myForm)
+    this.userSelection.email = this.myForm.value.email
+    this.userSelection.subscription = this.myForm.value.subscription
+    this.userSelection.password = this.myForm.value.password
+    this.myForm.reset();
+    this.subscription = 'Advanced'
   }
 }
